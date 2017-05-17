@@ -48,10 +48,14 @@ nmap <D-p> :CtrlP<cr>
 nmap <D-R> :CtrlPBufTag<cr>
 nmap <D-e> :CtrlPMRUFiles<cr>
 
+" Tab selected sections
+vmap <Tab> >gv
+vmap <S-Tab> <gv
+
 "------------Plugins--------------"
 " ctrlp
 let g:ctrlp_custom_ignore = 'node_modules\DS_Store\|git'
-let g:ctrlp_match_window = 'top,order:ttb,min:1,max:30,results:30' "top
+let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:30,results:30' "top
 
 " NERDTree
 let NERDTreeHijackNetrw = 0
@@ -98,6 +102,8 @@ augroup END
 " vi { - select all text in {
 " va { - select all text in { including {
 " shift+k - Opens help
+" gt :tabnext
+" C-w r - swap splits
 "
 " vim-vinegar ------------
 " - - dir
