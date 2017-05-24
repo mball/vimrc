@@ -8,7 +8,7 @@ syntax enable
 
 let mapleader = ','
 set number        " Line numbers
-set linespace=2   " Macvim specific line height.
+set linespace=4   " Macvim specific line height.
 "set shell=/bin/bash  " To fix CtrlP buff ????
 
 "------------Visuals--------------"
@@ -52,6 +52,12 @@ nmap <D-e> :CtrlPMRUFiles<cr>
 vmap <Tab> >gv
 vmap <S-Tab> <gv
 
+" php lint file
+nmap <Leader>p :!php -l %<cr>
+
+" Tag
+nmap <Leader>t :tag<space>
+
 "------------Plugins--------------"
 " ctrlp
 let g:ctrlp_custom_ignore = 'node_modules\DS_Store\|git'
@@ -74,6 +80,7 @@ let g:phpqa_codesniffer_autorun = 0
 " Show code coverage on load (default = 0)
 let g:phpqa_codecoverage_autorun = 0
 
+let g:ctrlp_extensions = ['buffertag']
 
 "------------Split--------------"
 set splitbelow
@@ -104,10 +111,19 @@ augroup END
 " shift+k - Opens help
 " gt :tabnext
 " C-w r - swap splits
+" :tag sometagname - Go to tag
+" :tn - goto next tag
+" :tp - goto previous tag
+" :ts - tag selector
+" C-] - Goto defined tag
+" C-^ - Return
 "
 " vim-vinegar ------------
 " - - dir
 " % - New File
 " d - New Dir
 " D - Delete File
-
+"
+" Ctags command with excludes
+" ctags -R --exclude=.git --exclude='*.sql' --exclude='*.sqlite'
+" --exclude=tests --exclude=database --exclude='*.js'
