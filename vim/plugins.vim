@@ -17,8 +17,10 @@ Plugin 'airblade/vim-gitgutter'
 
 " PHP
 Plugin 'spf13/PIV'
-Plugin 'joonty/vim-phpqa'
+" Plugin 'joonty/vim-phpqa'
 
+" Multiple selection
+Plugin 'terryma/vim-multiple-cursors'
 
 call vundle#end()            " required
 filetype plugin indent on    " required

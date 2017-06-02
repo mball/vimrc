@@ -58,6 +58,9 @@ nmap <Leader>p :!php -l %<cr>
 " Tag
 nmap <Leader>t :tag<space>
 
+" Work specific
+nmap <Leader>u :!vendor/bin/phpunit % --no-coverage<cr>
+
 "------------Plugins--------------"
 " ctrlp
 let g:ctrlp_custom_ignore = 'node_modules\DS_Store\|git'
@@ -124,6 +127,49 @@ augroup END
 " d - New Dir
 " D - Delete File
 "
+" vim-multiple-select
+" C-n - selects multiple words
+"
 " Ctags command with excludes
-" ctags -R --exclude=.git --exclude='*.sql' --exclude='*.sqlite'
-" --exclude=tests --exclude=database --exclude='*.js'
+" ctags -R --exclude=.git --exclude='*.sql' --exclude='*.sqlite' --exclude=tests --exclude=database --exclude='*.js'
+"
+"
+" '' - return to last mark
+" 'a - 'z		lowercase marks, valid within one file
+" 'A - 'Z		uppercase marks, also called file marks, valid between files
+" '0 - '9		numbered marks, set from .viminfo file
+"
+"
+" ============================= *fugitive-:Gstatus*
+" :Gstatus                Bring up the output of git-status in the preview
+"                         window.  The following maps, which work on the cursor
+"                         line file where sensible, are provided:
+" 
+"                         g?    show this help
+"                         <C-N> next file
+"                         <C-P> previous file
+"                         <CR>  |:Gedit|
+"                         -     |:Git| add
+"                         -     |:Git| reset (staged files)
+"                         cA    |:Gcommit| --amend --reuse-message=HEAD
+"                         ca    |:Gcommit| --amend
+"                         cc    |:Gcommit|
+"                         cva   |:Gcommit| --amend --verbose
+"                         cvc   |:Gcommit| --verbose
+"                         D     |:Gdiff|
+"                         ds    |:Gsdiff|
+"                         dp    |:Git!| diff (p for patch; use :Gw to apply)
+"                         dp    |:Git| add --intent-to-add (untracked files)
+"                         dv    |:Gvdiff|
+"                         O     |:Gtabedit|
+"                         o     |:Gsplit|
+"                         p     |:Git| add --patch
+"                         p     |:Git| reset --patch (staged files)
+"                         q     close status
+"                         r     reload status
+"                         S     |:Gvsplit|
+"                         U     |:Git| checkout
+"                         U     |:Git| checkout HEAD (staged files)
+"                         U     |:Git| clean (untracked files)
+"                         U     |:Git| rm (unmerged files)
+" 
