@@ -24,10 +24,10 @@ set wildmode=list:longest,full  " command <Tab> completion, list matches, then l
 set tabstop=4
 set expandtab
 set shiftwidth=4
-set softtabstop=4                " let backspace delete indent
-set pastetoggle=<F12>            " pastetoggle (sane indentation on pastes)
+set softtabstop=4      " let backspace delete indent
+set pastetoggle=<F12>  " pastetoggle (sane indentation on pastes)
 
-set nobackup " Don't create annoying backup files
+set nobackup   " Don't create annoying backup files
 set noswapfile " Swap files? Meh.
 
 "------------Visuals--------------"
@@ -35,17 +35,17 @@ colorscheme monokai
 set t_CO=256      " use 257 colors on terminal
 set guifont=Monaco
 " set macligatures   " we want pretty symbols when avail
-set guioptions-=e " Minimal tabs no guit tabs
+set guioptions-=e    " Minimal tabs no guit tabs
 let g:monokai_term_italic = 1
 let g:monokai_gui_italic = 1
 
-set guioptions-=l  " Kill those ugly srollbars
+set guioptions-=l  " Kill those ugly scrollbars
 set guioptions-=L
 set guioptions-=r
 set guioptions-=R
 
 "------------Mappings--------------"
-"Edit vimrc file new tabe"
+" Edit vimrc file new tab
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
 
 " Save file
@@ -55,7 +55,7 @@ map <leader>s :w<CR>
 nnoremap j gj
 nnoremap k gk
 
-"Highligh removal
+" Highlight removal
 nmap <Leader><space> :nohlsearch<cr>
 
 " Make NERDTree easier to toggle
@@ -69,7 +69,7 @@ nmap <D-e> :CtrlPMRUFiles<cr>
 vmap <Tab> >gv
 vmap <S-Tab> <gv
 
-" php lint file
+" php lint file - Needed because phpqa breaks tag buffer
 nmap <Leader>p :!php -l %<cr>
 
 " Tag
