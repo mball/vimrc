@@ -2,14 +2,33 @@ set nocompatible              " be iMproved, required
 
 so ~/.vim/plugins.vim
 
-
-
 syntax enable
 
 let mapleader = ','
 set number        " Line numbers
 set linespace=4   " Macvim specific line height.
-"set shell=/bin/bash  " To fix CtrlP buff ????
+set cursorline                  " highlight current line
+set showmode                    " display the current mode
+
+"------------Search--------------"
+set showmatch                   " show matching brackets/parenthesis
+set incsearch                   " find as you type search
+set ignorecase                  " case insensitive search
+set smartcase                   " case sensitive when uc present
+set hlsearch                    " highlight search terms
+
+set wildmenu                    " show list instead of just completing
+set wildmode=list:longest,full  " command <Tab> completion, list matches, then longest common part, then all.
+
+" use spaces
+set tabstop=4
+set expandtab
+set shiftwidth=4
+set softtabstop=4                " let backspace delete indent
+set pastetoggle=<F12>            " pastetoggle (sane indentation on pastes)
+
+set nobackup " Don't create annoying backup files
+set noswapfile " Swap files? Meh.
 
 "------------Visuals--------------"
 colorscheme monokai
@@ -20,23 +39,21 @@ set guioptions-=e " Minimal tabs no guit tabs
 let g:monokai_term_italic = 1
 let g:monokai_gui_italic = 1
 
-"------------Search--------------"
-set hlsearch      " highlight search
-set incsearch
-
 set guioptions-=l  " Kill those ugly srollbars
 set guioptions-=L
 set guioptions-=r
 set guioptions-=R
 
-" use spaces
-set tabstop=4
-set expandtab
-set shiftwidth=4
-
 "------------Mappings--------------"
 "Edit vimrc file new tabe"
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
+
+" Save file
+map <leader>s :w<CR>
+
+" Wrapped lines goes down/up to next row, rather than next line in file.
+nnoremap j gj
+nnoremap k gk
 
 "Highligh removal
 nmap <Leader><space> :nohlsearch<cr>
@@ -60,6 +77,17 @@ nmap <Leader>t :tag<space>
 
 " Work specific
 nmap <Leader>u :!vendor/bin/phpunit % --no-coverage<cr>
+
+" Fugitive
+nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gl :Glog<CR>
+nnoremap <silent> <leader>gp :Git push<CR>
+
+" For when you forget to sudo.. Really Write the file.
+cmap w!! w !sudo tee % >/dev/null
 
 "------------Plugins--------------"
 " ctrlp
@@ -95,11 +123,17 @@ nmap <C-H> <C-W><C-H>
 nmap <C-L> <C-W><C-L>
 
 
-" Auto Commaonds"
+" Auto Commands"
 augroup autosourcing
 	autocmd!
 	autocmd BufWritePost .vimrc source %
 augroup END
+
+" Keep syntax in sync (hopefully this isn't too slow)
+autocmd BufEnter * :syntax sync fromstart
+
+" Remove trailing whitespaces and ^M chars
+autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 " ----------------NOTES--------------- "
 " yy - Yank entire line
