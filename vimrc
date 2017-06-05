@@ -173,37 +173,4 @@ autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buff
 " 'A - 'Z		uppercase marks, also called file marks, valid between files
 " '0 - '9		numbered marks, set from .viminfo file
 "
-"
-" ============================= *fugitive-:Gstatus*
-" :Gstatus                Bring up the output of git-status in the preview
-"                         window.  The following maps, which work on the cursor
-"                         line file where sensible, are provided:
-" 
-"                         g?    show this help
-"                         <C-N> next file
-"                         <C-P> previous file
-"                         <CR>  |:Gedit|
-"                         -     |:Git| add
-"                         -     |:Git| reset (staged files)
-"                         cA    |:Gcommit| --amend --reuse-message=HEAD
-"                         ca    |:Gcommit| --amend
-"                         cc    |:Gcommit|
-"                         cva   |:Gcommit| --amend --verbose
-"                         cvc   |:Gcommit| --verbose
-"                         D     |:Gdiff|
-"                         ds    |:Gsdiff|
-"                         dp    |:Git!| diff (p for patch; use :Gw to apply)
-"                         dp    |:Git| add --intent-to-add (untracked files)
-"                         dv    |:Gvdiff|
-"                         O     |:Gtabedit|
-"                         o     |:Gsplit|
-"                         p     |:Git| add --patch
-"                         p     |:Git| reset --patch (staged files)
-"                         q     close status
-"                         r     reload status
-"                         S     |:Gvsplit|
-"                         U     |:Git| checkout
-"                         U     |:Git| checkout HEAD (staged files)
-"                         U     |:Git| clean (untracked files)
-"                         U     |:Git| rm (unmerged files)
-" 
+" csi"' - replace double quote with single. works with tags 't'
