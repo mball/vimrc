@@ -25,14 +25,18 @@ set tabstop=4
 set expandtab
 set shiftwidth=4
 set softtabstop=4      " let backspace delete indent
-set pastetoggle=<F12>  " pastetoggle (sane indentation on pastes)
+
+" pastetoggle (sane indentation on pastes) with feedback
+nnoremap <F12> :set invpaste paste?<CR>
+set pastetoggle=<F12>
+set showmode
 
 set nobackup   " Don't create annoying backup files
 set noswapfile " Swap files? Meh.
 
 "------------Visuals--------------"
 colorscheme monokai
-set t_CO=256      " use 257 colors on terminal
+set t_CO=256      " use 256 colors on terminal
 set guifont=Monaco
 " set macligatures   " we want pretty symbols when avail
 set guioptions-=e    " Minimal tabs no guit tabs
