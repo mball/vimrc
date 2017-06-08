@@ -90,6 +90,12 @@ nnoremap <silent> <leader>gb :Gblame<CR>
 nnoremap <silent> <leader>gl :Glog<CR>
 nnoremap <silent> <leader>gp :Git push<CR>
 
+" Smooth Scroll
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 8)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 8)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 12)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 12)<CR>
+
 " For when you forget to sudo.. Really Write the file.
 cmap w!! w !sudo tee % >/dev/null
 
@@ -138,6 +144,25 @@ autocmd BufEnter * :syntax sync fromstart
 
 " Remove trailing whitespaces and ^M chars
 autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+
+" Auto Save and auto load
+au BufWinLeave *.* silent! mkview  "make vim save view (state) (folds, cursor, etc)
+au BufWinEnter *.* silent! loadview "make vim load view (state) (folds, cursor, etc)
+
+if has('statusline')
+	set laststatus=2
+
+	" Broken down into easy-to-include segments
+	set statusline=                            " empty line to facilitate easy moving around of segments
+	set statusline+=%W%H%M%R                   " Options
+	"set statusline+=\ %<%f\  "
+	set statusline+=\ %<%t\  "
+	set statusline+=\ [%{getcwd()}]            " Current directory
+	set statusline+=\ %{fugitive#statusline()} " Git Info
+	set statusline+=\ [%{&ff}/%Y]              " Filetype
+	set statusline+=%=                         " split between left- and right-aligned info"
+	set statusline+=%-8.(%l,%c%V%)\ %p%%       " file nav info
+endif
 
 " ----------------NOTES--------------- "
 " yy - Yank entire line

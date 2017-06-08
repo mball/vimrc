@@ -22,6 +22,7 @@ Plugin 'spf13/PIV'
 
 " Other
 Plugin 'elzr/vim-json'
+Plugin 'terryma/vim-smooth-scroll'
 
 " Multiple selection
 Plugin 'terryma/vim-multiple-cursors'
