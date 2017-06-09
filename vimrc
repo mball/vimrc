@@ -26,6 +26,8 @@ set expandtab
 set shiftwidth=4
 set softtabstop=4      " let backspace delete indent
 
+set previewheight=30
+
 " pastetoggle (sane indentation on pastes) with feedback
 nnoremap <F12> :set invpaste paste?<CR>
 set pastetoggle=<F12>
