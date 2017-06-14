@@ -1,12 +1,16 @@
+" Environment {
 set nocompatible              " be iMproved, required
+" }
 
+" Plugins {
 so ~/.vim/plugins.vim
+" }
 
 syntax enable
 
-let mapleader = ','
+set hidden                      " allow buffer switching without saving
 set number        " Line numbers
-set linespace=4   " Macvim specific line height.
+set linespace=6   " Macvim specific line height.
 set cursorline                  " highlight current line
 set showmode                    " display the current mode
 
@@ -51,6 +55,7 @@ set guioptions-=r
 set guioptions-=R
 
 "------------Mappings--------------"
+let mapleader = ','
 " Edit vimrc file new tab
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
 
