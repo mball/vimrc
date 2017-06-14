@@ -4,17 +4,21 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
 " Color schemes
 Plugin 'crusoexia/vim-monokai'
 Plugin 'tomasr/molokai'
 Plugin 'dunckr/vim-monokai-soda'
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" Editer Plugins
 Plugin 'tpope/vim-vinegar'
+Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tpope/vim-surround'
+Plugin 'terryma/vim-smooth-scroll'
+Plugin 'terryma/vim-multiple-cursors'
 
 " Git Plugins
 Plugin 'tpope/vim-git'
@@ -25,12 +29,8 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'spf13/PIV'
 " Plugin 'joonty/vim-phpqa'
 
-" Other
+" json
 Plugin 'elzr/vim-json'
-Plugin 'terryma/vim-smooth-scroll'
-
-" Multiple selection
-Plugin 'terryma/vim-multiple-cursors'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
