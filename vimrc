@@ -46,9 +46,6 @@ set t_CO=256      " use 256 colors on terminal
 set guifont=Monaco
 " set macligatures   " we want pretty symbols when avail
 set guioptions-=e    " Minimal tabs no guit tabs
-let g:monokai_term_italic = 1
-let g:monokai_gui_italic = 1
-
 set guioptions-=l  " Kill those ugly scrollbars
 set guioptions-=L
 set guioptions-=r

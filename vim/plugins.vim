@@ -4,6 +4,11 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+" Color schemes
+Plugin 'crusoexia/vim-monokai'
+Plugin 'tomasr/molokai'
+Plugin 'dunckr/vim-monokai-soda'
+
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-vinegar'
