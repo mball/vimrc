@@ -40,6 +40,9 @@ set showmode
 set nobackup   " Don't create annoying backup files
 set noswapfile " Swap files? Meh.
 
+set textwidth=0 
+set wrapmargin=0
+
 "------------Visuals--------------"
 colorscheme monokai
 set t_CO=256      " use 256 colors on terminal
@@ -66,13 +69,6 @@ nnoremap k gk
 " Highlight removal
 nmap <Leader><space> :nohlsearch<cr>
 
-" Make NERDTree easier to toggle
-nmap <C-k><C-b> :NERDTreeToggle<cr>
-
-nmap <D-p> :CtrlP<cr>
-nmap <D-R> :CtrlPBufTag<cr>
-nmap <D-e> :CtrlPMRUFiles<cr>
-
 " Tab selected sections
 vmap <Tab> >gv
 vmap <S-Tab> <gv
@@ -86,19 +82,8 @@ nmap <Leader>t :tag<space>
 " Work specific
 nmap <Leader>u :!vendor/bin/phpunit % --no-coverage<cr>
 
-" Fugitive
-nnoremap <silent> <leader>gs :Gstatus<CR>
-nnoremap <silent> <leader>gd :Gdiff<CR>
-nnoremap <silent> <leader>gc :Gcommit<CR>
-nnoremap <silent> <leader>gb :Gblame<CR>
-nnoremap <silent> <leader>gl :Glog<CR>
-nnoremap <silent> <leader>gp :Git push<CR>
-
-" Smooth Scroll
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 8)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 8)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 12)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 12)<CR>
+" Regen ctags
+nmap <Leader>` :!ctags -R --exclude=.git --exclude='*.sql' --exclude='*.sqlite' --exclude=tests --exclude=database --exclude='*.js'<cr>
 
 " For when you forget to sudo.. Really Write the file.
 cmap w!! w !sudo tee % >/dev/null
@@ -106,10 +91,19 @@ cmap w!! w !sudo tee % >/dev/null
 "------------Plugins--------------"
 " ctrlp
 let g:ctrlp_custom_ignore = 'node_modules\DS_Store\|git'
-let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:30,results:30' "top
+let g:ctrlp_match_window = 'top,order:ttb,min:1,max:30,results:30' "top
+let g:ctrlp_extensions = ['buffertag']
+
+nmap <D-p> :CtrlP<cr>
+nmap <D-r> :CtrlPBufTag<cr>
+nmap <D-e> :CtrlPMRUFiles<cr>
 
 " NERDTree
+" prevent NERDTree from hijacking vinegar
 let NERDTreeHijackNetrw = 0
+
+" Make NERDTree easier to toggle
+nmap <D-k><D-b> :NERDTreeToggle<cr>
 
 " vim-phpqa
 " PHP executable (default = "php")
@@ -125,7 +119,19 @@ let g:phpqa_codesniffer_autorun = 0
 " Show code coverage on load (default = 0)
 let g:phpqa_codecoverage_autorun = 0
 
-let g:ctrlp_extensions = ['buffertag']
+" Fugitive
+nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gl :Glog<CR>
+nnoremap <silent> <leader>gp :Git push<CR>
+
+" Smooth Scroll
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 8)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 8)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 12)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 12)<CR>
 
 "------------Split--------------"
 set splitbelow
