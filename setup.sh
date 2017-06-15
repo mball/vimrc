@@ -11,6 +11,7 @@ git submodule update
 cd
 ln -s $dir/vimrc .vimrc
 ln -s $dir/vim .vim
+ls -s $dir/gvimrc .gvimrc
 
 # Install plugins
 vim +PluginInstall +qall
