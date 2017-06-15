@@ -11,14 +11,17 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'crusoexia/vim-monokai'
 Plugin 'tomasr/molokai'
 Plugin 'dunckr/vim-monokai-soda'
+Plugin 'gosukiwi/vim-atom-dark'
 
 " Editer Plugins
+Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'terryma/vim-smooth-scroll'
 Plugin 'terryma/vim-multiple-cursors'
+Plugin 'ervandew/supertab'
 
 " Git Plugins
 Plugin 'tpope/vim-git'
@@ -26,6 +29,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 
 " PHP
+Plugin 'StanAngeloff/php.vim'
+Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'spf13/PIV'
 " Plugin 'joonty/vim-phpqa'
 

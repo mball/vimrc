@@ -13,6 +13,10 @@ set number        " Line numbers
 set linespace=6   " Macvim specific line height.
 set cursorline                  " highlight current line
 set showmode                    " display the current mode
+set noerrorbells visualbell t_vb= " No damn sound
+set foldlevelstart=99
+set nofoldenable    " disable folding
+set complete=.,w,b,u  " set autocompletion to scope: current file, open windows, buffers, unloaded buffers,
 
 "------------Search--------------"
 set showmatch                   " show matching brackets/parenthesis
@@ -45,8 +49,9 @@ set wrapmargin=0
 
 "------------Visuals--------------"
 colorscheme monokai
+" colorscheme atom-dark-256
 set t_CO=256      " use 256 colors on terminal
-set guifont=Monaco
+set guifont=Monaco:h12
 " set macligatures   " we want pretty symbols when avail
 set guioptions-=e    " Minimal tabs no guit tabs
 set guioptions-=l  " Kill those ugly scrollbars
@@ -54,10 +59,21 @@ set guioptions-=L
 set guioptions-=r
 set guioptions-=R
 
+" We'll fake a custom left padding for each window
+hi LineNr guibg=bg
+" set foldcolumn=2
+hi foldcolumn guibg=bg
+
+" Hide split borders
+hi vertsplit guifg=bg guibg=bg
+
+hi SignColumn guibg=bg
+
 "------------Mappings--------------"
 let mapleader = ','
 " Edit vimrc file new tab
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
+nmap <Leader>ep :tabedit ~/.vim/plugins.vim<cr>
 
 " Save file
 map <leader>s :w<CR>
@@ -77,16 +93,22 @@ vmap <S-Tab> <gv
 nmap <Leader>p :!php -l %<cr>
 
 " Tag
-nmap <Leader>t :tag<space>
+nmap <Leader>f :tag<space>
 
-" Work specific
-nmap <Leader>u :!vendor/bin/phpunit % --no-coverage<cr>
+" Work specific nmap <Leader>u :!vendor/bin/phpunit % --no-coverage<cr>
 
 " Regen ctags
 nmap <Leader>` :!ctags -R --exclude=.git --exclude='*.sql' --exclude='*.sqlite' --exclude=tests --exclude=database --exclude='*.js'<cr>
 
+" Ag
+nmap <Leader>F :Ag<space>
+
 " For when you forget to sudo.. Really Write the file.
 cmap w!! w !sudo tee % >/dev/null
+
+" Sort by length
+nmap <Leader>sl ! awk '{ print length(), $0 | "sort -n | cut -d\\  -f2-" }'
+vmap <leader>su ! awk -f "{ print length(), $0 \| \"sort -n \| cut -d\\  -f2-\"}"<cr>
 
 "------------Plugins--------------"
 " ctrlp
@@ -132,6 +154,15 @@ noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 8)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 8)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 12)<CR>
 noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 12)<CR>
+
+" vim-php-namespace
+function! IPhpInsertUse()
+    call PhpInsertUse()
+    call feedkeys('a',  'n')
+endfunction
+autocmd FileType php inoremap <Leader>n <Esc>:call IPhpInsertUse()<CR>
+autocmd FileType php noremap <Leader>n :call PhpInsertUse()<CR>
+
 
 "------------Split--------------"
 set splitbelow
@@ -193,6 +224,7 @@ endif
 " :ts - tag selector
 " C-] - Goto defined tag
 " C-^ - Return
+" J - Bring line below to end of current line
 "
 " vim-vinegar ------------
 " - - dir
