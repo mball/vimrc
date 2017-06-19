@@ -10,12 +10,12 @@ syntax enable
 
 set hidden                      " allow buffer switching without saving
 set number        " Line numbers
-set linespace=6   " Macvim specific line height.
+set linespace=12   " Macvim specific line height.
 set cursorline                  " highlight current line
 set showmode                    " display the current mode
 set noerrorbells visualbell t_vb= " No damn sound
 set foldlevelstart=99
-set nofoldenable    " disable folding
+set nofoldenable      " disable folding
 set complete=.,w,b,u  " set autocompletion to scope: current file, open windows, buffers, unloaded buffers,
 
 "------------Search--------------"
@@ -48,8 +48,9 @@ set textwidth=0
 set wrapmargin=0
 
 "------------Visuals--------------"
-colorscheme monokai
-" colorscheme atom-dark-256
+" colorscheme monokai
+colorscheme atom-dark-256
+" colorscheme zellner
 set t_CO=256      " use 256 colors on terminal
 set guifont=Monaco:h12
 " set macligatures   " we want pretty symbols when avail
@@ -95,13 +96,11 @@ nmap <Leader>p :!php -l %<cr>
 " Tag
 nmap <Leader>f :tag<space>
 
-" Work specific nmap <Leader>u :!vendor/bin/phpunit % --no-coverage<cr>
+" Work specific
+nmap <Leader>u :!vendor/bin/phpunit % --no-coverage<cr>
 
 " Regen ctags
-nmap <Leader>` :!ctags -R --exclude=.git --exclude='*.sql' --exclude='*.sqlite' --exclude=tests --exclude=database --exclude='*.js'<cr>
-
-" Ag
-nmap <Leader>F :Ag<space>
+nmap <Leader>` :!ctags -R --exclude=.git --exclude='*.sql' --exclude='*.sqlite' --exclude=tests --exclude=database --exclude='*.js' --exclude=public<cr>
 
 " For when you forget to sudo.. Really Write the file.
 cmap w!! w !sudo tee % >/dev/null
@@ -125,7 +124,7 @@ nmap <D-e> :CtrlPMRUFiles<cr>
 let NERDTreeHijackNetrw = 0
 
 " Make NERDTree easier to toggle
-nmap <D-k><D-b> :NERDTreeToggle<cr>
+nmap <C-k><C-b> :NERDTreeToggle<cr>
 
 " vim-phpqa
 " PHP executable (default = "php")
@@ -163,6 +162,13 @@ endfunction
 autocmd FileType php inoremap <Leader>n <Esc>:call IPhpInsertUse()<CR>
 autocmd FileType php noremap <Leader>n :call PhpInsertUse()<CR>
 
+" Ag
+let g:ag_highlight=1
+nmap <Leader>F :Ag<space>
+
+"spf13/PIV
+" Disable code folding
+let g:DisableAutoPHPFolding=1
 
 "------------Split--------------"
 set splitbelow
@@ -206,6 +212,8 @@ if has('statusline')
 endif
 
 " ----------------NOTES--------------- "
+" ,pd - auto generate php doc
+" <C-X><C-O> - omni complete $instance-><C-X><C-O>
 " yy - Yank entire line
 " zz - Center cursor to screen
 " C-w | - Expand split to full screen
