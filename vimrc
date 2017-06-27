@@ -8,6 +8,8 @@ so ~/.vim/plugins.vim
 
 syntax enable
 
+scriptencoding utf-8
+set mouse=a                 " automatically enable mouse usage
 set hidden                      " allow buffer switching without saving
 set number        " Line numbers
 set linespace=12   " Macvim specific line height.
@@ -90,6 +92,10 @@ nmap <Leader><space> :nohlsearch<cr>
 vmap <Tab> >gv
 vmap <S-Tab> <gv
 
+" Quickfix
+nmap <Leader>qq :copen<cr>
+nmap <Leader>qc :cclose<cr>
+
 " php lint file - Needed because phpqa breaks tag buffer
 nmap <Leader>p :!php -l %<cr>
 
@@ -170,6 +176,11 @@ nmap <Leader>F :Ag<space>
 " Disable code folding
 let g:DisableAutoPHPFolding=1
 
+" TagBar {
+nnoremap <silent> <leader>tt :TagbarToggle<CR>
+nnoremap <silent> <leader>to :TagbarOpen jf<CR>
+"}
+
 "------------Split--------------"
 set splitbelow
 set splitright
@@ -193,8 +204,8 @@ autocmd BufEnter * :syntax sync fromstart
 autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
 " Auto Save and auto load
-au BufWinLeave *.* silent! mkview  "make vim save view (state) (folds, cursor, etc)
-au BufWinEnter *.* silent! loadview "make vim load view (state) (folds, cursor, etc)
+" au BufWinLeave *.* silent! mkview  "make vim save view (state) (folds, cursor, etc)
+" au BufWinEnter *.* silent! loadview "make vim load view (state) (folds, cursor, etc)
 
 if has('statusline')
 	set laststatus=2
