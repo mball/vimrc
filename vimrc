@@ -251,6 +251,8 @@ endif
 " C-] - Goto defined tag
 " C-^ - Return
 " J - Bring line below to end of current line
+" <leader> tt - Toggle tag bar
+" <leader> to - Open tag bar
 "
 " vim-vinegar ------------
 " - - dir
