@@ -80,7 +80,7 @@ nmap <Leader>ev :tabedit $MYVIMRC<cr>
 nmap <Leader>ep :tabedit ~/.vim/plugins.vim<cr>
 
 " Save file
-map <leader>s :w<CR>
+map <Leader>s :w<CR>
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
 nnoremap j gj
@@ -196,19 +196,15 @@ nmap <C-L> <C-W><C-L>
 
 
 " Auto Commands"
-augroup vimrc_autosourcing
-	autocmd!
-	autocmd BufWritePost .vimrc source %
-augroup END
-
 augroup vimrc_autocmd
-    autocmd!
+	autocmd!
+    " source vimrc on save
+	autocmd BufWritePost .vimrc source %
+
     " Keep syntax in sync (hopefully this isn't too slow)
     autocmd BufEnter * :syntax sync fromstart
-
-    " Remove trailing whitespaces and ^M chars
-    autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 augroup END
+
 
 " Auto Save and auto load
 " au BufWinLeave *.* silent! mkview  "make vim save view (state) (folds, cursor, etc)
