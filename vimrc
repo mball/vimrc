@@ -11,6 +11,7 @@ syntax enable
 scriptencoding utf-8
 set mouse=a                 " automatically enable mouse usage
 set hidden                      " allow buffer switching without saving
+set relativenumber    " Relative line numbers
 set number        " Line numbers
 set linespace=12   " Macvim specific line height.
 set cursorline                  " highlight current line
@@ -165,8 +166,11 @@ function! IPhpInsertUse()
     call PhpInsertUse()
     call feedkeys('a',  'n')
 endfunction
-autocmd FileType php inoremap <Leader>n <Esc>:call IPhpInsertUse()<CR>
-autocmd FileType php noremap <Leader>n :call PhpInsertUse()<CR>
+augroup vimrc_php_namespace
+    autocmd!
+    autocmd FileType php inoremap <Leader>n <Esc>:call IPhpInsertUse()<CR>
+    autocmd FileType php noremap <Leader>n :call PhpInsertUse()<CR>
+augroup END
 
 " Ag
 let g:ag_highlight=1
@@ -192,16 +196,19 @@ nmap <C-L> <C-W><C-L>
 
 
 " Auto Commands"
-augroup autosourcing
+augroup vimrc_autosourcing
 	autocmd!
 	autocmd BufWritePost .vimrc source %
 augroup END
 
-" Keep syntax in sync (hopefully this isn't too slow)
-autocmd BufEnter * :syntax sync fromstart
+augroup vimrc_autocmd
+    autocmd!
+    " Keep syntax in sync (hopefully this isn't too slow)
+    autocmd BufEnter * :syntax sync fromstart
 
-" Remove trailing whitespaces and ^M chars
-autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+    " Remove trailing whitespaces and ^M chars
+    autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+augroup END
 
 " Auto Save and auto load
 " au BufWinLeave *.* silent! mkview  "make vim save view (state) (folds, cursor, etc)

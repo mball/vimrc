@@ -23,6 +23,7 @@ Plugin 'terryma/vim-smooth-scroll'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ervandew/supertab'
 Plugin 'majutsushi/tagbar'
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 
 " Git Plugins
 Plugin 'tpope/vim-git'
