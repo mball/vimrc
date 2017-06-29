@@ -155,12 +155,6 @@ nnoremap <silent> <leader>gb :Gblame<CR>
 nnoremap <silent> <leader>gl :Glog<CR>
 nnoremap <silent> <leader>gp :Git push<CR>
 
-" Smooth Scroll
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 8)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 8)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 12)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 12)<CR>
-
 " vim-php-namespace
 function! IPhpInsertUse()
     call PhpInsertUse()
