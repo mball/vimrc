@@ -14,12 +14,13 @@ set hidden                      " allow buffer switching without saving
 set relativenumber    " Relative line numbers
 set number        " Line numbers
 set linespace=12   " Macvim specific line height.
-set cursorline                  " highlight current line
+" set cursorline                  " highlight current line WARNING: This makes screes redrawing slower
 set showmode                    " display the current mode
 set noerrorbells visualbell t_vb= " No damn sound
 set foldlevelstart=99
 set nofoldenable      " disable folding
 set complete=.,w,b,u  " set autocompletion to scope: current file, open windows, buffers, unloaded buffers,
+set lazyredraw
 
 "------------Search--------------"
 set showmatch                   " show matching brackets/parenthesis
@@ -36,6 +37,7 @@ set tabstop=4
 set expandtab
 set shiftwidth=4
 set softtabstop=4      " let backspace delete indent
+set autoindent
 
 set previewheight=30
 
@@ -51,10 +53,13 @@ set textwidth=0
 set wrapmargin=0
 
 "------------Visuals--------------"
+set t_CO=256      " use 256 colors on terminal
+" let g:solarized_termcolors=256
+" set background=dark
+" colorscheme solarized
 " colorscheme monokai
 colorscheme atom-dark-256
-" colorscheme zellner
-set t_CO=256      " use 256 colors on terminal
+
 set guifont=Monaco:h12
 " set macligatures   " we want pretty symbols when avail
 set guioptions-=e    " Minimal tabs no guit tabs
@@ -75,6 +80,10 @@ hi SignColumn guibg=bg
 
 "------------Mappings--------------"
 let mapleader = ','
+
+"Saves time; maps the spacebar to colon
+nmap <space> :
+
 " Edit vimrc file new tab
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
 nmap <Leader>ep :tabedit ~/.vim/plugins.vim<cr>
@@ -85,6 +94,9 @@ map <Leader>s :w<CR>
 " Wrapped lines goes down/up to next row, rather than next line in file.
 nnoremap j gj
 nnoremap k gk
+
+" Make Y yank everything from the cursor to end of line
+noremap Y y$
 
 " Highlight removal
 nmap <Leader><space> :nohlsearch<cr>
@@ -115,6 +127,16 @@ cmap w!! w !sudo tee % >/dev/null
 " Sort by length
 nmap <Leader>sl ! awk '{ print length(), $0 | "sort -n | cut -d\\  -f2-" }'
 vmap <leader>su ! awk -f "{ print length(), $0 \| \"sort -n \| cut -d\\  -f2-\"}"<cr>
+
+" Allows you to easily replace the current word and all its occurrences.
+nnoremap <Leader>rc :%s/\<<C-r><C-w>\>/
+vnoremap <Leader>rc y:%s/<C-r>"/
+
+" Allows you to easily change the current word and all occurrences to something
+" else. The difference between this and the previous mapping is that the mapping
+" below pre-fills the current word for you to change.
+nnoremap <Leader>cc :%s/\<<C-r><C-w>\>/<C-r><C-w>
+vnoremap <Leader>cc y:%s/<C-r>"/<C-r>"
 
 "------------Plugins--------------"
 " ctrlp
