@@ -25,6 +25,10 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ervandew/supertab'
 Plugin 'majutsushi/tagbar'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plugin 'jiangmiao/auto-pairs'
+
+" Syntax checker
+Plugin 'vim-syntastic/syntastic'
 
 " Git Plugins
 Plugin 'tpope/vim-git'
@@ -35,10 +39,15 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'StanAngeloff/php.vim'
 Plugin 'arnaud-lb/vim-php-namespace'
 Plugin 'spf13/PIV'
-" Plugin 'joonty/vim-phpqa'
 
 " json
 Plugin 'elzr/vim-json'
+
+" GraphQL
+Plugin 'jparise/vim-graphql'
+
+" Blueprint
+Plugin 'kylef/apiblueprint.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required

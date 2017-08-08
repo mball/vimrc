@@ -11,7 +11,7 @@ syntax enable
 scriptencoding utf-8
 set mouse=a                 " automatically enable mouse usage
 set hidden                      " allow buffer switching without saving
-set relativenumber    " Relative line numbers
+" set relativenumber    " Relative line numbers
 set number        " Line numbers
 set linespace=12   " Macvim specific line height.
 " set cursorline                  " highlight current line WARNING: This makes screes redrawing slower
@@ -54,14 +54,15 @@ set wrapmargin=0
 
 "------------Visuals--------------"
 set t_CO=256      " use 256 colors on terminal
-" let g:solarized_termcolors=256
-" set background=dark
-" colorscheme solarized
-" colorscheme monokai
-colorscheme atom-dark-256
+let g:solarized_termcolors=256
+set background=dark
+colorscheme solarized
+"colorscheme monokai
+"colorscheme atom-dark-256
+"colorscheme zellner
 
 set guifont=Monaco:h12
-" set macligatures   " we want pretty symbols when avail
+set macligatures   " we want pretty symbols when avail
 set guioptions-=e    " Minimal tabs no guit tabs
 set guioptions-=l  " Kill those ugly scrollbars
 set guioptions-=L
@@ -83,6 +84,10 @@ let mapleader = ','
 
 "Saves time; maps the spacebar to colon
 nmap <space> :
+
+" Curls graphql
+map <Leader>z :!curl --request POST --url http://salesrabbitdl2.app/web/graphql/new_mind --header 'api-token: 285' --header 'content-type: application/json' --data '{ "query": "query{ orgUnits (userId: 11699190) {id name}}","variables": null}' \| jq -M<cr>
+map <Leader>x :!curl --request POST --url http://salesrabbitdl2.app/web/graphql/new_mind --header 'api-token: 285' --header 'content-type: application/json' --data '{ "query": "query{ orgUnits (userId: 11699190) {id name}}","variables": null}'<cr>
 
 " Edit vimrc file new tab
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
@@ -155,20 +160,6 @@ let NERDTreeHijackNetrw = 0
 " Make NERDTree easier to toggle
 nmap <C-k><C-b> :NERDTreeToggle<cr>
 
-" vim-phpqa
-" PHP executable (default = "php")
-" let g:phpqa_php_cmd='/path/to/php'
-" PHP Code Sniffer binary (default = "phpcs")
-let g:phpqa_codesniffer_cmd='/Users/mball/.composer/vendor/bin/phpcs'
-" PHP Mess Detector binary (default = "phpmd")
-let g:phpqa_messdetector_cmd='/Users/mball/.composer/vendor/bin/phpmd'
-" Don't run messdetector on save (default = 1)
-let g:phpqa_messdetector_autorun = 0
-" Don't run codesniffer on save (default = 1)
-let g:phpqa_codesniffer_autorun = 0
-" Show code coverage on load (default = 0)
-let g:phpqa_codecoverage_autorun = 0
-
 " Fugitive
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
@@ -201,6 +192,17 @@ nnoremap <silent> <leader>tt :TagbarToggle<CR>
 nnoremap <silent> <leader>to :TagbarOpen jf<CR>
 "}
 
+" API Blueprint
+autocmd FileType apiblueprint nmap <leader>eb :call GenerateRefract()<cr>
+
+" Syntastic
+let g:syntastic_api_checkers = ['drafter']
+let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 "------------Split--------------"
 set splitbelow
 set splitright
@@ -232,12 +234,18 @@ if has('statusline')
 	" Broken down into easy-to-include segments
 	set statusline=                            " empty line to facilitate easy moving around of segments
 	set statusline+=%W%H%M%R                   " Options
-	"set statusline+=\ %<%f\  "
-	set statusline+=\ %<%t\  "
-	set statusline+=\ [%{getcwd()}]            " Current directory
+	set statusline+=\ %<%f\  "
+	"set statusline+=\ %<%t\  "
+	"set statusline+=\ [%{getcwd()}]            " Current directory
 	set statusline+=\ %{fugitive#statusline()} " Git Info
 	set statusline+=\ [%{&ff}/%Y]              " Filetype
+
 	set statusline+=%=                         " split between left- and right-aligned info"
+
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
+
 	set statusline+=%-8.(%l,%c%V%)\ %p%%       " file nav info
 endif
 
