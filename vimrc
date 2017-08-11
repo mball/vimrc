@@ -11,8 +11,9 @@ syntax enable
 scriptencoding utf-8
 set mouse=a                 " automatically enable mouse usage
 set hidden                      " allow buffer switching without saving
-" set relativenumber    " Relative line numbers
 set number        " Line numbers
+"set relativenumber    " Relative line numbers
+set norelativenumber
 set linespace=12   " Macvim specific line height.
 " set cursorline                  " highlight current line WARNING: This makes screes redrawing slower
 set showmode                    " display the current mode
@@ -55,19 +56,26 @@ set wrapmargin=0
 "------------Visuals--------------"
 set t_CO=256      " use 256 colors on terminal
 let g:solarized_termcolors=256
-set background=dark
-colorscheme solarized
-"colorscheme monokai
-"colorscheme atom-dark-256
-"colorscheme zellner
 
-set guifont=Monaco:h12
-set macligatures   " we want pretty symbols when avail
-set guioptions-=e    " Minimal tabs no guit tabs
-set guioptions-=l  " Kill those ugly scrollbars
-set guioptions-=L
-set guioptions-=r
-set guioptions-=R
+if has('gui_running')
+    set background=dark
+    colorscheme solarized
+    "colorscheme monokai
+    "colorscheme atom-dark-256
+    "colorscheme zellner
+
+    set guifont=Monaco:h13
+    set guioptions-=e    " Minimal tabs no guit tabs
+    set guioptions-=l  " Kill those ugly scrollbars
+    set guioptions-=L
+    set guioptions-=r
+    set guioptions-=R
+
+	if has('gui_macvim')
+        set transparency=5          " Make the window slightly transparent
+        set macligatures   " we want pretty symbols when avail
+	endif
+endif
 
 " We'll fake a custom left padding for each window
 hi LineNr guibg=bg
