@@ -13,6 +13,12 @@ Plugin 'tomasr/molokai'
 Plugin 'dunckr/vim-monokai-soda'
 Plugin 'gosukiwi/vim-atom-dark'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'YorickPeterse/happy_hacking.vim'
+Plugin 'kamwitsta/mythos'
+Plugin 'KeitaNakamura/neodark.vim'
+Plugin 'JarrodCTaylor/spartan'
+Plugin 'scwood/vim-hybrid'
+Plugin 'tyrannicaltoucan/vim-deep-space'
 
 " Editer Plugins
 Plugin 'rking/ag.vim'
@@ -26,6 +32,7 @@ Plugin 'ervandew/supertab'
 Plugin 'majutsushi/tagbar'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'vim-airline/vim-airline'
 
 " Syntax checker
 Plugin 'vim-syntastic/syntastic'
