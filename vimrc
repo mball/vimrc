@@ -1,19 +1,21 @@
 " Environment {
-set nocompatible              " be iMproved, required
+"set nocompatible  " be iMproved, required Update: We don't actually need this
 " }
 
 " Plugins {
 so ~/.vim/plugins.vim
 " }
 
-syntax enable
+if !exists("g:syntax_on")
+    syntax enable
+endif 
 
 set encoding=utf-8
 scriptencoding utf-8
 set mouse=a                 " automatically enable mouse usage
 set hidden                      " allow buffer switching without saving
 set number        " Line numbers
-"set relativenumber    " Relative line numbers
+set relativenumber    " Relative line numbers
 "set norelativenumber
 "
 " set cursorline                  " highlight current line WARNING: This makes screes redrawing slower
@@ -35,7 +37,7 @@ set wildmenu                    " show list instead of just completing
 set wildmode=list:longest,full  " command <Tab> completion, list matches, then longest common part, then all.
 
 " use spaces
-set tabstop=4
+"set tabstop=4 // It is recommended we don't change this value. Default is 8
 set expandtab
 set shiftwidth=4
 set softtabstop=4      " let backspace delete indent
@@ -53,6 +55,10 @@ set noswapfile " Swap files? Meh.
 set textwidth=0 
 set wrapmargin=0
 
+
+" Fast terminal redraw
+set ttyfast
+
 "------------Visuals--------------"
 set t_CO=256      " use 256 colors on terminal
 let g:solarized_termcolors=256
@@ -66,22 +72,27 @@ if has('gui_running')
     "colorscheme happy_hacking
     "colorscheme monokai-soda
     "colorscheme mythos
-    colorscheme neodark
+    "colorscheme neodark
     "colorscheme spartan
-    "colorscheme hybrid
+    colorscheme hybrid
     "colorscheme deep-space
 
-    set guifont=Monaco:h12
+    set guifont=Fira\ Code\ Retina:h13
     set guioptions-=e    " Minimal tabs no gui tabs
     set guioptions-=l  " Kill those ugly scrollbars
     set guioptions-=L
     set guioptions-=r
     set guioptions-=R
+    set guioptions-=T
 
 	if has('gui_macvim')
-        set transparency=10       " Make the window slightly transparent
+        set transparency=4       " Make the window slightly transparent
+        set blur=10
         set macligatures   " we want pretty symbols when avail
+        set antialias
         set linespace=5   " Macvim specific line height.
+        set columnspace=0
+        set macthinstrokes  " Thin text only for gui mac. Looks nice on dark backgrounds
 	endif
 endif
 
@@ -102,8 +113,26 @@ let mapleader = ','
 nmap <space> :
 
 " Curls graphql
-map <Leader>z :!curl --request POST --url http://salesrabbitdl2.app/web/graphql/new_mind --header 'api-token: 285' --header 'content-type: application/json' --data '{ "query": "query{ orgUnits (userId: 11699190) {id name}}","variables": null}' \| jq -M<cr>
-map <Leader>x :!curl --request POST --url http://salesrabbitdl2.app/web/graphql/new_mind --header 'api-token: 285' --header 'content-type: application/json' --data '{ "query": "query{ orgUnits (userId: 11699190) {id name}}","variables": null}'<cr>
+map <Leader>zz :!curl --request POST --url http://salesrabbitdl2.app/web/graphql --header 'api-token: 285' --header 'content-type: application/json' --data '{ "query": "query{ forms {id name fields {id} groups {id}}}","variables": null}' \| jq -M<cr>
+"map <Leader>zx :!curl --request POST --url http://salesrabbitdl2.app/web/graphql --header 'api-token: 285' --header 'content-type: application/json' --data '{ "query": "query{ orgUnits (userId: 11699190) {id name}}","variables": null}'<cr>
+map <Leader>zx :!curl --request POST --url http://salesrabbitdl2.app/web/graphql --header 'api-token: 285' --header 'content-type: application/json' --data '{ "query": "query{ forms {id name fields {id} groups {id}}}","variables": null}'<cr>
+map <Leader>zi :!curl --request POST --url http://salesrabbitdl2.app/web/graphql --header 'api-token: 285' --header 'content-type: application/json' --data '{ "query": "{ __schema { queryType { name, kind, description, fields { description deprecationReason } } } }"}' \| jq -M<cr>
+map <Leader>zm :!curl --request POST --url http://salesrabbitdl2.app/web/graphql --header 'api-token: 285' --header 'content-type: application/json' --data '{ "query": "mutation { createForm (input: {name: \"test\", type: \"type\", format: \"formats\", published: false}) { form { id } } }"}'<cr>
+
+function! GraphQL(query, jq)
+    if a:jq == 1
+        let jq = " | jq -M"
+    else
+        let jq = ""
+    endif
+
+    echom a:query
+    exe "!curl -X POST -v http://salesrabbitdl2.app/web/graphql -H 'Api-Token: 285' -H 'Content-Type: application/json' --data '{ \"query\": \"" . a:query . "\"}'" . jq
+endfunction
+
+function! MakeSession()
+    exe "mksession! .vim.session"
+endfunction
 
 " Edit vimrc file new tab
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
@@ -133,8 +162,10 @@ nmap <Leader>qc :cclose<cr>
 " php lint file - Needed because phpqa breaks tag buffer
 nmap <Leader>p :!php -l %<cr>
 
-" Tag
-nmap <Leader>f :tag<space>
+" Searching
+nmap <Leader>ft :tag<space>
+nnoremap <Leader>fc :Ag <C-r><C-w>
+vnoremap <Leader>fc y:Ag <C-r>"
 
 " Work specific
 nmap <Leader>u :!vendor/bin/phpunit % --no-coverage<cr>
@@ -148,6 +179,9 @@ cmap w!! w !sudo tee % >/dev/null
 " Sort by length
 nmap <Leader>sl ! awk '{ print length(), $0 | "sort -n | cut -d\\  -f2-" }'
 vmap <leader>su ! awk -f "{ print length(), $0 \| \"sort -n \| cut -d\\  -f2-\"}"<cr>
+
+" Toggle comments
+vmap <D-/> <Leader>c<Space>
 
 " Allows you to easily replace the current word and all its occurrences.
 nnoremap <Leader>rc :%s/\<<C-r><C-w>\>/
@@ -213,7 +247,8 @@ autocmd FileType apiblueprint nmap <leader>eb :call GenerateRefract()<cr>
 
 " Syntastic
 let g:syntastic_api_checkers = ['drafter']
-let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
+let g:syntastic_php_checkers = ['php', 'phpmd', 'phpcs']
+let g:syntastic_php_phpcs_args = '--standard=PSR2,PSR1'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
@@ -282,6 +317,35 @@ augroup vimrc_autocmd
     " Keep syntax in sync (hopefully this isn't too slow)
     autocmd BufEnter * :syntax sync fromstart
 augroup END
+
+" Session handler found https://www.reddit.com/r/vim/comments/6zcq87/vim_sessions_new_to_me_never_heard_of_it_but_am/dmuj06o/
+"" Session
+nnoremap <leader>ss :call MakeSession()<cr>
+nnoremap <leader>sl :call LoadSession()<cr>
+
+" Modified to drop sessions in current working dir.
+set ssop-=options       " do not store options (vimrc) in a session
+"" Make and load method to save session per dir
+function! MakeSession()
+    exe "mksession! .vim.session"
+endfunction
+function! LoadSession()
+    let b:sessionfile = ".vim.session"
+    if (filereadable(b:sessionfile))
+        exe 'source ' b:sessionfile
+    else
+        echo "No session loaded."
+    endif
+
+endfunction
+
+" Auto-commands 
+"augroup autosourcing
+    "if(argc() == 0)
+        ""au VimEnter * nested :call LoadSession() " Uncomment to automatically load session
+        "au VimLeave * :call MakeSession()
+    "endif
+"augroup END
 
 
 " Auto Save and auto load

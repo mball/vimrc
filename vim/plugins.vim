@@ -30,9 +30,10 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ervandew/supertab'
 Plugin 'majutsushi/tagbar'
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+"Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'vim-airline/vim-airline'
+Plugin 'xtal8/traces.vim'
 
 " Syntax checker
 Plugin 'vim-syntastic/syntastic'
