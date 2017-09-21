@@ -112,28 +112,6 @@ let mapleader = ','
 "Saves time; maps the spacebar to colon
 nmap <space> :
 
-" Curls graphql
-map <Leader>zz :!curl --request POST --url http://salesrabbitdl2.app/web/graphql --header 'api-token: 285' --header 'content-type: application/json' --data '{ "query": "query{ forms {id name fields {id} groups {id}}}","variables": null}' \| jq -M<cr>
-"map <Leader>zx :!curl --request POST --url http://salesrabbitdl2.app/web/graphql --header 'api-token: 285' --header 'content-type: application/json' --data '{ "query": "query{ orgUnits (userId: 11699190) {id name}}","variables": null}'<cr>
-map <Leader>zx :!curl --request POST --url http://salesrabbitdl2.app/web/graphql --header 'api-token: 285' --header 'content-type: application/json' --data '{ "query": "query{ forms {id name fields {id} groups {id}}}","variables": null}'<cr>
-map <Leader>zi :!curl --request POST --url http://salesrabbitdl2.app/web/graphql --header 'api-token: 285' --header 'content-type: application/json' --data '{ "query": "{ __schema { queryType { name, kind, description, fields { description deprecationReason } } } }"}' \| jq -M<cr>
-map <Leader>zm :!curl --request POST --url http://salesrabbitdl2.app/web/graphql --header 'api-token: 285' --header 'content-type: application/json' --data '{ "query": "mutation { createForm (input: {name: \"test\", type: \"type\", format: \"formats\", published: false}) { form { id } } }"}'<cr>
-
-function! GraphQL(query, jq)
-    if a:jq == 1
-        let jq = " | jq -M"
-    else
-        let jq = ""
-    endif
-
-    echom a:query
-    exe "!curl -X POST -v http://salesrabbitdl2.app/web/graphql -H 'Api-Token: 285' -H 'Content-Type: application/json' --data '{ \"query\": \"" . a:query . "\"}'" . jq
-endfunction
-
-function! MakeSession()
-    exe "mksession! .vim.session"
-endfunction
-
 " Edit vimrc file new tab
 nmap <Leader>ev :tabedit $MYVIMRC<cr>
 nmap <Leader>ep :tabedit ~/.vim/plugins.vim<cr>
