@@ -1,4 +1,4 @@
-" Environment {
+""" Environment {
 "set nocompatible  " be iMproved, required Update: We don't actually need this
 " }
 
@@ -15,10 +15,9 @@ scriptencoding utf-8
 set mouse=a                 " automatically enable mouse usage
 set hidden                      " allow buffer switching without saving
 set number        " Line numbers
-set relativenumber    " Relative line numbers
-"set norelativenumber
+"set relativenumber    " Relative line numbers
 "
-" set cursorline                  " highlight current line WARNING: This makes screes redrawing slower
+"set cursorline                  " highlight current line WARNING: This makes screes redrawing slower
 "set showmode                    " display the current mode. No need for this with airline
 set noerrorbells visualbell t_vb= " No damn sound
 set foldlevelstart=99
@@ -86,13 +85,13 @@ if has('gui_running')
     set guioptions-=T
 
 	if has('gui_macvim')
-        set transparency=4       " Make the window slightly transparent
-        set blur=10
-        set macligatures   " we want pretty symbols when avail
-        set antialias
-        set linespace=5   " Macvim specific line height.
-        set columnspace=0
-        set macthinstrokes  " Thin text only for gui mac. Looks nice on dark backgrounds
+            set transparency=4       " Make the window slightly transparent
+            set blur=10
+            "set macligatures   " we want pretty symbols when avail Warning: This is slow
+            set antialias
+            set linespace=6   " Macvim specific line height.
+            set columnspace=0
+            set macthinstrokes  " Thin text only for gui mac. Looks nice on dark backgrounds
 	endif
 endif
 
