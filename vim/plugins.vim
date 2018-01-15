@@ -19,6 +19,11 @@ Plugin 'VundleVim/Vundle.vim'
 "Plugin 'JarrodCTaylor/spartan'
 Plugin 'scwood/vim-hybrid'
 "Plugin 'tyrannicaltoucan/vim-deep-space'
+"Plugin 'lifepillar/vim-solarized8'
+"Plugin 'machakann/vim-colorscheme-tatami'
+"Plugin 'zcodes/vim-colors-basic'
+"Plugin 'vim-scripts/mayansmoke'
+"Plugin 'wolverian/minimal'
 
 " Editer Plugins
 Plugin 'rking/ag.vim'
@@ -32,7 +37,10 @@ Plugin 'ervandew/supertab'
 Plugin 'majutsushi/tagbar'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'xtal8/traces.vim'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'moll/vim-bbye'
 
 " Syntax checker
 Plugin 'vim-syntastic/syntastic'
@@ -55,6 +63,9 @@ Plugin 'jparise/vim-graphql'
 
 " Blueprint
 Plugin 'kylef/apiblueprint.vim'
+
+" Arduino
+Plugin 'sudar/vim-arduino-syntax'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
