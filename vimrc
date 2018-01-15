@@ -212,8 +212,10 @@ let g:ctrlp_custom_ignore = 'node_modules\DS_Store\|git'
 let g:ctrlp_match_window = 'top,order:ttb,min:1,max:30,results:30' "top
 let g:ctrlp_extensions = ['buffertag']
 
-let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-let g:ctrlp_use_caching = 0
+if (executable('rg'))
+    let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+    let g:ctrlp_use_caching = 0
+endif
 
 nmap <D-p> :CtrlP<cr>
 nmap <D-r> :CtrlPBufTag<cr>
