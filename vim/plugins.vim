@@ -18,12 +18,13 @@ Plugin 'VundleVim/Vundle.vim'
 "Plugin 'KeitaNakamura/neodark.vim'
 "Plugin 'JarrodCTaylor/spartan'
 Plugin 'scwood/vim-hybrid'
-"Plugin 'tyrannicaltoucan/vim-deep-space'
-"Plugin 'lifepillar/vim-solarized8'
-"Plugin 'machakann/vim-colorscheme-tatami'
-"Plugin 'zcodes/vim-colors-basic'
-"Plugin 'vim-scripts/mayansmoke'
-"Plugin 'wolverian/minimal'
+Plugin 'tyrannicaltoucan/vim-deep-space'
+Plugin 'lifepillar/vim-solarized8'
+Plugin 'machakann/vim-colorscheme-tatami'
+Plugin 'zcodes/vim-colors-basic'
+Plugin 'vim-scripts/mayansmoke'
+Plugin 'wolverian/minimal'
+Plugin 'kadekillary/subtle_solo'
 
 " Editer Plugins
 Plugin 'rking/ag.vim'
@@ -41,6 +42,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'xtal8/traces.vim'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'moll/vim-bbye'
+Plugin 'ryanoasis/vim-devicons'
 
 " Syntax checker
 Plugin 'vim-syntastic/syntastic'
@@ -66,6 +68,12 @@ Plugin 'kylef/apiblueprint.vim'
 
 " Arduino
 Plugin 'sudar/vim-arduino-syntax'
+
+" Debugger
+Plugin 'joonty/vdebug'
+
+" Database
+Plugin 'tpope/vim-dadbod'
 
 call vundle#end()            " required
 filetype plugin indent on    " required

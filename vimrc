@@ -10,7 +10,7 @@ if !exists("g:syntax_on")
     syntax enable
 endif 
 
-set encoding=utf-8
+set encoding=utf8
 scriptencoding utf-8
 set mouse=a                 " automatically enable mouse usage
 set hidden                      " allow buffer switching without saving
@@ -19,6 +19,7 @@ set number        " Line numbers
 "
 "set cursorline                  " highlight current line WARNING: This makes screes redrawing slower
 "set showmode                    " display the current mode. No need for this with airline
+set showcmd
 set noerrorbells visualbell t_vb= " No damn sound
 set foldlevelstart=99
 set nofoldenable      " disable folding
@@ -66,7 +67,7 @@ set autoread " Autoload file changes. You can undo by pressing u
 set ttyfast
 
 "------------Visuals--------------"
-set t_CO=256      " use 256 colors on terminal
+set t_Co=256      " use 256 colors on terminal
 let g:solarized_termcolors=256
 
 "if has('gui_running')
@@ -92,6 +93,7 @@ let g:solarized_termcolors=256
     "colorscheme zellner
     "colorscheme minimal
     "colorscheme mayansmoke
+    "colorscheme subtle_light "(dark/light)
     "colorscheme vim-colors-basic
     "colorscheme vim-colorscheme-tatami
     
@@ -110,7 +112,8 @@ if has('gui_macvim')
     "set columnspace=0
     set macthinstrokes  " Thin text only for gui mac. Looks nice on dark backgrounds
 
-    set guifont=Fira\ Code\ Retina:h13
+    "set guifont=Fira\ Code\ Retina:h13
+    set guifont=Knack\ Nerd\ Font:h13
     set guioptions-=e  " Minimal tabs no gui tabs
     set guioptions-=l  " Remove the scrollbars
     set guioptions-=L
@@ -202,6 +205,9 @@ vnoremap <Leader>rc y:%s/<C-r>"/
 nnoremap <Leader>cc :%s/\<<C-r><C-w>\>/<C-r><C-w>
 vnoremap <Leader>cc y:%s/<C-r>"/<C-r>"
 
+" Shortcut to fix syntax highlighting
+nmap <Leader>xx :syntax sync fromstart<cr>
+
 "------------Plugins--------------"
 " bbye
 nnoremap <Leader>w :Bdelete<CR>
@@ -219,6 +225,7 @@ endif
 
 nmap <D-p> :CtrlP<cr>
 nmap <D-r> :CtrlPBufTag<cr>
+nmap <Leader>r :CtrlPBufTag<cr>
 nmap <D-e> :CtrlPMRUFiles<cr>
 
 " NERDTree
@@ -235,6 +242,7 @@ nnoremap <silent> <leader>gc :Gcommit<CR>
 nnoremap <silent> <leader>gb :Gblame<CR>
 nnoremap <silent> <leader>gl :Glog<CR>
 nnoremap <silent> <leader>gp :Git push<CR>
+nnoremap <silent> <leader>gu :Git pull<CR>
 nnoremap <silent> <leader>gf :Glog -- %<CR>
 
 " vim-php-namespace
@@ -328,6 +336,9 @@ let g:airline_mode_map = {
 
 let g:airline_theme='tomorrow'
 
+" Needed for nerd fonts
+let g:airline_powerline_fonts = 1
+
 "------------Split--------------"
 set splitbelow
 set splitright
@@ -345,7 +356,7 @@ augroup vimrc_autocmd
 	autocmd BufWritePost .vimrc source %
 
     " Keep syntax in sync (hopefully this isn't too slow)
-    autocmd BufEnter * :syntax sync fromstart
+    "autocmd BufEnter * :syntax sync fromstart
 augroup END
 
 " Session handler found https://www.reddit.com/r/vim/comments/6zcq87/vim_sessions_new_to_me_never_heard_of_it_but_am/dmuj06o/
@@ -376,7 +387,6 @@ endfunction
         "au VimLeave * :call MakeSession()
     "endif
 "augroup END
-
 
 " Auto Save and auto load
 " au BufWinLeave *.* silent! mkview  "make vim save view (state) (folds, cursor, etc)
@@ -445,3 +455,17 @@ endfunction
 " Highlight then :!jq '.'
 "
 "
+" Debugging
+" <F5>: start/run (to next breakpoint/end of script)
+" <F2>: step over
+" <F3>: step into
+" <F4>: step out
+" <F6>: stop debugging (kills script)
+" <F7>: detach script from debugger
+" <F9>: run to cursor
+" <F10>: toggle line breakpoint
+" <F11>: show context variables (e.g. after "eval")
+" <F12>: evaluate variable under cursor
+" :Breakpoint <type> <args>: set a breakpoint of any type (see :help VdebugBreakpoints)
+" :VdebugEval <code>: evaluate some code and display the result
+" <Leader>e: evaluate the expression under visual highlight and display the result
