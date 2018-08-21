@@ -188,9 +188,8 @@ nmap <Leader>` :!ctags -R --exclude=.git --exclude='*.sql' --exclude='*.sqlite' 
 cmap w!! w !sudo tee % >/dev/null
 
 " Sort by length
-" @TODO: These need to be updated. They were conflicting with session bindings
 nmap <Leader>su ! awk '{ print length(), $0 | "sort -n | cut -d\\  -f2-" }'
-vmap <leader>su ! awk -f "{ print length(), $0 \| \"sort -n \| cut -d\\  -f2-\"}"<cr>
+vmap <leader>su ! awk '{ print length(), $0 | "sort -n | cut -d\\  -f2-" }'<cr>
 
 " Toggle comments
 vmap <D-/> <Leader>c<Space>
@@ -225,7 +224,7 @@ endif
 
 nmap <D-p> :CtrlP<cr>
 nmap <D-r> :CtrlPBufTag<cr>
-nmap <Leader>r :CtrlPBufTag<cr>
+nmap <Leader>rr :CtrlPBufTag<cr>
 nmap <D-e> :CtrlPMRUFiles<cr>
 
 " NERDTree
@@ -237,7 +236,7 @@ nmap <C-k><C-b> :NERDTreeToggle<cr>
 
 " Fugitive
 nnoremap <silent> <leader>gs :Gstatus<CR>
-nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gd :Gvdiff<CR>
 nnoremap <silent> <leader>gc :Gcommit<CR>
 nnoremap <silent> <leader>gb :Gblame<CR>
 nnoremap <silent> <leader>gl :Glog<CR>
@@ -343,12 +342,6 @@ let g:airline_powerline_fonts = 1
 set splitbelow
 set splitright
 
-nmap <C-J> <C-W><C-J>
-nmap <C-K> <C-W><C-K>
-nmap <C-H> <C-W><C-H>
-nmap <C-L> <C-W><C-L>
-
-
 " Auto Commands"
 augroup vimrc_autocmd
 	autocmd!
@@ -388,84 +381,11 @@ endfunction
     "endif
 "augroup END
 
-" Auto Save and auto load
-" au BufWinLeave *.* silent! mkview  "make vim save view (state) (folds, cursor, etc)
-" au BufWinEnter *.* silent! loadview "make vim load view (state) (folds, cursor, etc)
+" Vdebug settings
 
-" ----------------NOTES--------------- "
-" ,pd - auto generate php doc
-" <C-X><C-O> - omni complete $instance-><C-X><C-O>
-" yy - Yank entire line
-" zz - Center cursor to screen
-" C-w | - Expand split to full screen
-" C-w = - Euqalize splits
-" :ls - list buffers
-" :e - edit a file
-" :bd - close current buffer
-" vi { - select all text in {
-" va { - select all text in { including {
-" shift+k - Opens help
-" gt :tabnext
-" C-w r - swap splits
-" :tag sometagname - Go to tag
-" :tn - goto next tag
-" :tp - goto previous tag
-" :ts - tag selector
-" C-] - Goto defined tag
-" C-^ - Return
-" J - Bring line below to end of current line
-" <leader> tt - Toggle tag bar
-" <leader> to - Open tag bar
-"
-" vim-vinegar ------------
-" - - dir
-" % - New File
-" d - New Dir
-" D - Delete File
-"
-" vim-multiple-select
-" C-n - selects multiple words
-"
-" Ctags command with excludes
-" ctags -R --exclude=.git --exclude='*.sql' --exclude='*.sqlite' --exclude=tests --exclude=database --exclude='*.js'
-"
-"
-" '' - return to last mark
-" 'a - 'z		lowercase marks, valid within one file
-" 'A - 'Z		uppercase marks, also called file marks, valid between files
-" '0 - '9		numbered marks, set from .viminfo file
-"
-" csi"' - replace double quote with single. works with tags 't'
-"
-" Unimpaired
-" [<Space> and ]<Space> add newlines before and after the cursor line. [e and ]e exchange the current line with the one above or below it.
-" [x and ]x encode and decode XML (and HTML). [u and ]u encode and decode URLs. [y and ]y do C String style escaping.
-" ]q is :cnext. [q is :cprevious. ]a is :next. [b is :bprevious
-"
-" Glog
-" :Glog       Load all previous revisions of the current file into the quickfix list.
-" :Glog --    Load all previous commits into the quickfix list.
-" :Glog -- %  Load all commits that touch the current file into the quickfix list.
-"
-" tiler plugin. Check it out
-" sudo -e /etc/whatever to edit files while keeping your vim config
-"
-"
-" Pretty json
-" Highlight then :!jq '.'
-"
-"
-" Debugging
-" <F5>: start/run (to next breakpoint/end of script)
-" <F2>: step over
-" <F3>: step into
-" <F4>: step out
-" <F6>: stop debugging (kills script)
-" <F7>: detach script from debugger
-" <F9>: run to cursor
-" <F10>: toggle line breakpoint
-" <F11>: show context variables (e.g. after "eval")
-" <F12>: evaluate variable under cursor
-" :Breakpoint <type> <args>: set a breakpoint of any type (see :help VdebugBreakpoints)
-" :VdebugEval <code>: evaluate some code and display the result
-" <Leader>e: evaluate the expression under visual highlight and display the result
+"function! SetupDebug()
+    "let g:vdebug_options['path_maps'] = {"REMOTE_PROJECT_DIR": "LOCAL_PROJECT_DIR"}
+    ""let g:vdebug_options['server'] = "REMOTE_SERVER"
+    "source ~/.vim/bundle/vdebug/plugin/vdebug.vim
+"endfunction
+"autocmd VimEnter * :call SetupDebug()

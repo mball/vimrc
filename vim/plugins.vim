@@ -70,10 +70,13 @@ Plugin 'kylef/apiblueprint.vim'
 Plugin 'sudar/vim-arduino-syntax'
 
 " Debugger
-Plugin 'joonty/vdebug'
+"Plugin 'joonty/vdebug'
 
 " Database
-Plugin 'tpope/vim-dadbod'
+"Plugin 'tpope/vim-dadbod'
+
+" Tmux
+Plugin 'christoomey/vim-tmux-navigator'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
