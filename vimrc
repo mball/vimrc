@@ -12,11 +12,11 @@ endif
 
 set encoding=utf8
 scriptencoding utf-8
-set mouse=a                 " automatically enable mouse usage
-set hidden                      " allow buffer switching without saving
+set mouse=a       " automatically enable mouse usage
+set hidden        " allow buffer switching without saving
 set number        " Line numbers
 "set relativenumber    " Relative line numbers
-"
+
 "set cursorline                  " highlight current line WARNING: This makes screes redrawing slower
 "set showmode                    " display the current mode. No need for this with airline
 set showcmd
@@ -37,7 +37,6 @@ set wildmenu                    " show list instead of just completing
 set wildmode=list:longest,full  " command <Tab> completion, list matches, then longest common part, then all.
 
 " use spaces
-"set tabstop=4 // It is recommended we don't change this value. Default is 8
 set expandtab
 set shiftwidth=4
 set softtabstop=4      " let backspace delete indent
@@ -103,23 +102,32 @@ let g:solarized_termcolors=256
     "colorscheme solarized8_light_flat
 "endif
 
-if has('gui_macvim')
-    set transparency=0       " Make the window slightly transparent
-    set blur=10
-    "set macligatures   " we want pretty symbols when avail Warning: This is slow
-    set antialias
-    set linespace=4   " Macvim specific line height.
-    "set columnspace=0
-    set macthinstrokes  " Thin text only for gui mac. Looks nice on dark backgrounds
+" Veonim config
+if exists('veonim')
+    set guifont=Hack:h11
+endif
 
-    "set guifont=Fira\ Code\ Retina:h13
-    set guifont=Knack\ Nerd\ Font:h13
-    set guioptions-=e  " Minimal tabs no gui tabs
-    set guioptions-=l  " Remove the scrollbars
-    set guioptions-=L
-    set guioptions-=r
-    set guioptions-=R
-    set guioptions-=T
+if has('gui_running')
+    if has("gui_macvim")
+        "set macthinstrokes  " Thin text only for gui mac. Looks nice on dark backgrounds
+        "set macligatures   " we want pretty symbols when avail Warning: This is slow
+        set guifont=Fira\ Code\ Retina:h13
+        "set transparency=0       " Make the window slightly transparent
+        "set blur=10
+    endif
+    "set antialias
+    "set columnspace=0
+
+    set guifont=Hack:h8
+    set guioptions-=e  " Minimaldftabs no gui tabs
+    set guioptions-=l  " Remove left-hand scrollbar
+    set guioptions-=L  " Remove left-hand scrollbar on vsplit
+    set guioptions-=r  " Remove right-hand scrollbar
+    set guioptions-=R  " Remove right-hand scrollbar on vsplit
+    set guioptions-=T  " Remove toolbar
+    set guioptions-=m  " Remove menu bar
+
+    set linespace=2   " Line height
 
     " We'll fake a custom left padding for each window
     hi LineNr guibg=bg
