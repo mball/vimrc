@@ -40,9 +40,10 @@ set wildmode=list:longest,full  " command <Tab> completion, list matches, then l
 set expandtab
 set shiftwidth=4
 set softtabstop=4      " let backspace delete indent
+set tabstop=4
 set autoindent
 
-set previewheight=30
+"set previewheight=30
 
 " pastetoggle (sane indentation on pastes) with feedback
 nnoremap <F12> :set invpaste paste?<CR>
@@ -72,34 +73,17 @@ let g:solarized_termcolors=256
 "if has('gui_running')
     " Dark
     set background=dark
-    "colorscheme atom-dark-256
-    "colorscheme solarized
     "colorscheme monokai
     "colorscheme happy_hacking
-    "colorscheme monokai-soda
-    "colorscheme mythos
-    "colorscheme neodark
-    "colorscheme spartan
-    colorscheme hybrid
-    "colorscheme deep-space
-    "colorscheme solarized8_dark
-    "colorscheme solarized8_dark_low
-    "colorscheme solarized8_dark_high
-    "colorscheme solarized8_dark_flat
+    colorscheme lucius
+    "colorscheme hybrid
 
     " Light
     "set background=light
     "colorscheme zellner
     "colorscheme minimal
     "colorscheme mayansmoke
-    "colorscheme subtle_light "(dark/light)
-    "colorscheme vim-colors-basic
-    "colorscheme vim-colorscheme-tatami
     
-    "colorscheme solarized8_light
-    "colorscheme solarized8_light_low
-    "colorscheme solarized8_light_high
-    "colorscheme solarized8_light_flat
 "endif
 
 " Veonim config
@@ -179,7 +163,7 @@ nmap <Leader>qq :copen<cr>
 nmap <Leader>qc :cclose<cr>
 
 " php lint file - Needed because phpqa breaks tag buffer
-nmap <Leader>p :!php -l %<cr>
+"nmap <Leader>p :!php -l %<cr>
 
 " Searching
 nmap <Leader>ft :tag<space>
@@ -187,7 +171,7 @@ nnoremap <Leader>fc :Ag <C-r><C-w>
 vnoremap <Leader>fc y:Ag <C-r>"
 
 " Work specific
-nmap <Leader>u :!vendor/bin/phpunit % --no-coverage<cr>
+"nmap <Leader>u :!vendor/bin/phpunit % --no-coverage<cr>
 
 " Regen ctags
 nmap <Leader>` :!ctags -R --exclude=.git --exclude='*.sql' --exclude='*.sqlite' --exclude=tests --exclude=database --exclude='*.js' --exclude=public<cr>
@@ -227,7 +211,7 @@ let g:ctrlp_extensions = ['buffertag']
 
 if (executable('rg'))
     let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-    let g:ctrlp_use_caching = 0
+    "let g:ctrlp_use_caching = 0
 endif
 
 nmap <D-p> :CtrlP<cr>
@@ -253,15 +237,15 @@ nnoremap <silent> <leader>gu :Git pull<CR>
 nnoremap <silent> <leader>gf :Glog -- %<CR>
 
 " vim-php-namespace
-function! IPhpInsertUse()
-    call PhpInsertUse()
-    call feedkeys('a',  'n')
-endfunction
-augroup vimrc_php_namespace
-    autocmd!
-    autocmd FileType php inoremap <Leader>n <Esc>:call IPhpInsertUse()<CR>
-    autocmd FileType php noremap <Leader>n :call PhpInsertUse()<CR>
-augroup END
+"function! IPhpInsertUse()
+    "call PhpInsertUse()
+    "call feedkeys('a',  'n')
+"endfunction
+"augroup vimrc_php_namespace
+    "autocmd!
+    "autocmd FileType php inoremap <Leader>n <Esc>:call IPhpInsertUse()<CR>
+    "autocmd FileType php noremap <Leader>n :call PhpInsertUse()<CR>
+"augroup END
 
 " Ag
 let g:ag_highlight=1
@@ -269,7 +253,7 @@ nmap <Leader>F :Ag<space>
 
 "spf13/PIV
 " Disable code folding
-let g:DisableAutoPHPFolding=1
+"let g:DisableAutoPHPFolding=1
 
 " TagBar {
 nnoremap <silent> <leader>tt :TagbarToggle<CR>
@@ -280,9 +264,9 @@ nnoremap <silent> <leader>to :TagbarOpen jf<CR>
 autocmd FileType apiblueprint nmap <leader>eb :call GenerateRefract()<cr>
 
 " Syntastic
-let g:syntastic_api_checkers = ['drafter']
-let g:syntastic_php_checkers = ['php', 'phpmd', 'phpcs']
-let g:syntastic_php_phpcs_args = '--standard=PSR2,PSR1'
+"let g:syntastic_api_checkers = ['drafter']
+"let g:syntastic_php_checkers = ['php', 'phpmd', 'phpcs']
+"let g:syntastic_php_phpcs_args = '--standard=PSR2,PSR1'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
