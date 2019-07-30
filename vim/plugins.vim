@@ -53,6 +53,13 @@ Plugin 'AndrewRadev/splitjoin.vim'
 " PS1
 Plugin 'PProvost/vim-ps1'
 
+" C#
+Plugin 'OmniSharp/omnisharp-vim'
+Plugin 'OrangeT/vim-csharp'
+
+" Typescript
+Plugin 'leafgarland/typescript-vim'
+
 " json
 Plugin 'elzr/vim-json'
 
@@ -60,7 +67,7 @@ Plugin 'elzr/vim-json'
 " Plugin 'jparise/vim-graphql'
 
 " Blueprint
-" Plugin 'kylef/apiblueprint.vim'
+Plugin 'kylef/apiblueprint.vim'
 
 " Arduino
 " Plugin 'sudar/vim-arduino-syntax'

@@ -43,7 +43,7 @@ set softtabstop=4      " let backspace delete indent
 set tabstop=4
 set autoindent
 
-"set previewheight=30
+set previewheight=10
 
 " pastetoggle (sane indentation on pastes) with feedback
 nnoremap <F12> :set invpaste paste?<CR>
@@ -174,7 +174,8 @@ vnoremap <Leader>fc y:Ag <C-r>"
 "nmap <Leader>u :!vendor/bin/phpunit % --no-coverage<cr>
 
 " Regen ctags
-nmap <Leader>` :!ctags -R --exclude=.git --exclude='*.sql' --exclude='*.sqlite' --exclude=tests --exclude=database --exclude='*.js' --exclude=public<cr>
+" nmap <Leader>` :!ctags -R --exclude=.git --exclude='*.sql' --exclude='*.sqlite' --exclude=tests --exclude=database --exclude='*.js' --exclude=public<cr>
+nmap <Leader>` :!ctags -R --exclude=.git --exclude='*.sql' --exclude='*.Tests' --exclude=Database --exclude=database --exclude='*.js'<cr>
 
 " For when you forget to sudo.. Really Write the file.
 cmap w!! w !sudo tee % >/dev/null
@@ -198,6 +199,9 @@ vnoremap <Leader>cc y:%s/<C-r>"/<C-r>"
 
 " Shortcut to fix syntax highlighting
 nmap <Leader>xx :syntax sync fromstart<cr>
+
+" Pretty json formatter
+nmap <Leader>pj :%!python -m json.tool<cr>
 
 "------------Plugins--------------"
 " bbye
